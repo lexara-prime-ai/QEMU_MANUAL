@@ -27,3 +27,60 @@ C:\User> qemu-system-x86_64 -m 1024  -boot d -enable-kvm -smp 3  -net nic -net u
 **`-hda testing-image.img`**: Here we specified the path for the hard drive which will be used. In our case, it was the testing-image.img file which we created before.
 
 **`-cdrom ubuntu-16.04.iso`**: Finally we told QEMU that we want to boot our ISO file “ubuntu-16.04.iso”.
+
+* After you run the previous command, QEMU will start for you as a standalone window:
+
+Now, if you want to **just boot from the image file without the ISO file** (for example ***if you have finished installing and now you always want to boot the installed system***), you can just **remove** the **`-cdrom`** option:
+
+```powershell
+C:\User> qemu-system-x86_64 -m 1024  -boot d -enable-kvm -smp 3  -net nic -net user -hda testing-image.img
+```
+
+* If you want, you can choose from a lot of other **available architectures** to test your systems on:
+
+**On Linux :**
+```bash
+$ ls /usr/bin | grep qemu-system*
+```
+**Output :**
+```bash
+qemu-system-aarch64
+qemu-system-alpha
+qemu-system-arm
+qemu-system-cris
+qemu-system-i386
+qemu-system-lm32
+qemu-system-m68k
+qemu-system-microblaze
+qemu-system-microblazeel
+qemu-system-mips
+qemu-system-mips64
+qemu-system-mips64el
+qemu-system-mipsel
+qemu-system-moxie
+qemu-system-or32
+qemu-system-ppc
+qemu-system-ppc64
+qemu-system-ppc64le
+qemu-system-ppcemb
+qemu-system-sh4
+qemu-system-sh4eb
+qemu-system-sparc
+qemu-system-sparc64
+qemu-system-tricore
+qemu-system-unicore32
+qemu-system-x86_64
+qemu-system-x86_64-spice
+qemu-system-xtensa
+qemu-system-xtensaeb
+```
+**For example**, if you want to emulate the **i386 architecture**, you should run the following command:
+```powershell
+C:\User> qemu-system-i386 -m 1024  -boot d -enable-kvm -smp 3  -net nic -net user -hda testing-image.img
+```
+Just make sure that the ISO file for Linux distributions and other operating systems you use are for the same architecture that you use on QEMU. If they are different, you may not be able to boot it up or install it.
+
+If you want to use QEMU to boot from a CD / DVD inserted at your disk drive, then you can easily do:
+```powershell
+C:\User> qemu-system-x86_64 -m 1024  -boot d -enable-kvm -smp 3  -net nic -net user -hda testing-image.img -cdrom /dev/cdrom
+```
